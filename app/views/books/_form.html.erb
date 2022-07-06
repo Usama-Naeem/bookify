@@ -1,0 +1,20 @@
+<%= simple_form_for @book, :html => { :multipart => true } do |f| %>
+  <br/>
+  <br/>
+  <%= f.file_field :book_img %>
+  <br/>
+  <%= f.input :title, label: "Book Title" %>
+  <%= f.input :isbn, label: "ISBN" %>
+  <%= f.input :description %>
+  <%= f.input :author %>
+    <strong> Categories : <br/> </strong>
+   <div class="field">
+    <%= hidden_field_tag "book[category_ids][]", nil %>
+    <% Category.all.each do |category| %>
+      <%= check_box_tag "book[category_ids][]", category.id, @book.category_ids.include?(category.id), id: dom_id(category) %>
+      <%= label_tag dom_id(category), category.name %><br>
+    <% end %>
+  </div>
+
+  <%= f.button :submit, :class => 'btn-custom2' %>
+<% end %>

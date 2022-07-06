@@ -1,0 +1,9 @@
+<div class="row">
+  <% @books.each do |book| %>
+    <div class="col-md-3">
+      <a href="/books/<%= book.id %>">
+        <%= image_tag book.book_img.variant(resize_to_limit: [300, 300]), class:"book" if book.book_img.attached? %>
+      </a>
+    </div>
+  <% end %>
+</div>
